@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import { useMemo } from 'react';
+import { Helmet } from 'react-helmet';
 
 const imageTags = ['og:image', 'twitter:image'];
 const descriptionTags = [
@@ -72,7 +73,22 @@ const App = () => {
       'https://img.edilportale.com/product-thumbs/b_FLOORA-NESITE-489946-rel87e0a964.jpg',
   });
 
-  return <div className="App">Test image</div>;
+  return (
+    <div className="App">
+      Test image
+      <Helmet>
+        <title>TEST TITLE 3</title>
+        <meta
+          name="og:description"
+          content="This is a test title"
+        />
+        <meta
+          name="og:image"
+          content="https://img.edilportale.com/product-thumbs/b_FLOORA-NESITE-489946-rel87e0a964.jpg"
+        />
+      </Helmet>
+    </div>
+  );
 };
 
 export default App;

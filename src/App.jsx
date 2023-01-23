@@ -65,30 +65,41 @@ export const useChangeMetaTags = ({ title, image, description }) => {
   }, [title, image, description]);
 };
 
-const App = () => {
-  useChangeMetaTags({
-    title: 'Test title',
-    description: 'This is a test title',
-    image:
-      'https://img.edilportale.com/product-thumbs/b_FLOORA-NESITE-489946-rel87e0a964.jpg',
-  });
-
-  return (
-    <div className="App">
-      Test image
-      <Helmet>
-        <title>TEST TITLE 3</title>
-        <meta
-          name="og:description"
-          content="This is a test title"
-        />
-        <meta
-          name="og:image"
-          content="https://img.edilportale.com/product-thumbs/b_FLOORA-NESITE-489946-rel87e0a964.jpg"
-        />
-      </Helmet>
-    </div>
-  );
-};
+const getChangeMetaTags = ({ title, image, description }) => (
+  <Helmet>
+    <title>{title}</title>
+    <meta
+      name="og:image"
+      content={image}
+    />
+    <meta
+      name="twitter:image"
+      content={image}
+    />
+    <meta
+      name="description"
+      content={description}
+    />
+    <meta
+      name="og:description"
+      content={description}
+    />
+    <meta
+      name="twitter:description"
+      content={description}
+    />
+  </Helmet>
+);
+const App = () => (
+  <div className="App">
+    Test image
+    {getChangeMetaTags({
+      title: 'Test title',
+      description: 'This is a test title',
+      image:
+        'https://img.edilportale.com/product-thumbs/b_FLOORA-NESITE-489946-rel87e0a964.jpg',
+    })}
+  </div>
+);
 
 export default App;

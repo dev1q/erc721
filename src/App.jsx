@@ -3,6 +3,8 @@ import './App.css';
 
 import { useMemo } from 'react';
 import { Helmet } from 'react-helmet';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const imageTags = ['og:image', 'twitter:image'];
 const descriptionTags = [
@@ -65,34 +67,50 @@ export const useChangeMetaTags = ({ title, image, description }) => {
   }, [title, image, description]);
 };
 
-const getChangeMetaTags = ({ title, image, description }) => (
-  <Helmet>
-    <title>{title}</title>
-    <meta
-      name="og:image"
-      content={image}
-    />
-    <meta
-      name="twitter:image"
-      content={image}
-    />
-    <meta
-      name="description"
-      content={description}
-    />
-    <meta
-      name="og:description"
-      content={description}
-    />
-    <meta
-      name="twitter:description"
-      content={description}
-    />
-  </Helmet>
-);
+const getChangeMetaTags = ({ title, image, description }) => {
+  const [tim, setTim] = useState();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTim(true);
+    }, [5000]);
+  }, []);
+
+  if (tim) {
+    return (
+      <Helmet>
+        <title>{title}</title>
+        <meta
+          name="og:image"
+          content={image}
+        />
+        <meta
+          name="twitter:image"
+          content={image}
+        />
+        <meta
+          name="description"
+          content={description}
+        />
+        <meta
+          name="og:description"
+          content={description}
+        />
+        <meta
+          name="twitter:description"
+          content={description}
+        />
+      </Helmet>
+    );
+  }
+
+  return null;
+};
+
 const App = () => (
   <div className="App">
     Test image
+    <div>Content</div>
     {getChangeMetaTags({
       title: 'Test title',
       description: 'This is a test title',
